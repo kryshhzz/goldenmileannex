@@ -1,0 +1,142 @@
+{% load static %}
+<style>
+    header {
+        width : 100%;
+        background :var(--milk);
+        border-bottom : .1em solid var(--gray-dark);
+
+        position: fixed;
+        top : 0;
+        left : 0;
+        z-index: 100;
+    }
+    .header-cont{
+        width : 100%;
+        padding: .5em 1em;
+
+        display: flex;
+        justify-content: space-between;
+        align-items : center;
+        gap : 1em;
+    }
+    .logo-cont {
+        width : 10em;
+
+        display : flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .logo {
+        border-radius: .25em;
+        /*filter: saturate(150) grayscale(1) contrast(10);*/
+    }
+    .links-cont {
+
+    }
+    .links-cont .close-nav , .menu-btn {
+        display: none;
+    }
+    @media(max-width : 736px){
+        .links-cont {
+            width : 100vw;
+            height : 100vh;
+            position : fixed;
+            top : 0;
+            right : -100%;
+
+            transition : 1s;
+            background : var(--milk);
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2em;
+        }
+        .active-nav {
+            position : fixed;
+            top : 0;
+            right : 0 !important;
+        }
+        .close-nav {
+            display: flex !important;
+            justify-content: center;
+            align-items: center;
+            gap: 1em;
+
+            padding :1em 3em ;
+            border-radius: 2em;
+            color :  var(--black);
+            background : var(--gray-med);
+            cursor: pointer;
+        }
+        .close-nav:hover{
+            background: var(--milk);
+        }
+        .menu-btn {
+            display : block !important;
+            cursor : pointer;
+        }
+        .menu-btn i {
+            color : var(--black-dark);
+            font-size: 1.25em;
+        }
+    }
+    .nav-a {
+        color : var(--black-dark);
+        text-decoration : none;
+        padding : .75em 1em;
+    }
+    .nav-btn {
+        color : var(--base);
+        display : none;
+    }
+    .nav-a:hover{
+        text-decoration: underline var(--black-low);
+    }
+</style>
+<header>
+    <div class="header-cont stiff">
+        <div class="logo-cont">
+            <img src="{% static 'logo.png' %}" alt="Golden Mile Annex Logo" class="logo">
+        </div>
+        <div class="links-cont">
+            <a class="nav-a" id='abtus-nav' >About us</a>
+            <a class="nav-a" id='plots-nav'>Plots</a>
+            <a id='vach-nav' class="nav-a">Vacation Homes</a>
+            <a id='hosp-nav' class="nav-a">Hospitality</a>
+            <a href="/download-brochure/" class="nav-a nav-btn">Download Brochure <i class="bi-download"></i></a>
+            <div class="close-nav" onclick="toggleNav();">Close <i class="bi-chevron-right"></i></div>
+        </div>
+        <div class="menu-btn" onclick="toggleNav()">
+            <i class="bi-grid-fill"></i>
+        </div>
+    </div>
+</header>
+<script>
+
+    var elements = document.getElementsByClassName("nav-a");
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].onclick = function() {
+            document.querySelector('.links-cont').classList.remove('active-nav');
+        };
+    }
+
+    function toggleNav(){
+        document.querySelector('.links-cont').classList.toggle('active-nav');
+    }
+
+    document.querySelector('#abtus-nav').addEventListener("click",function(){
+        Scroll('.aboutus-bowl')
+    })
+    document.querySelector('#plots-nav').addEventListener("click",function(){
+        Scroll('.plots-bowl')
+    })
+    document.querySelector('#vach-nav').addEventListener("click",function(){
+        Scroll('.vachomes-bowl')
+    })
+    document.querySelector('#hosp-nav').addEventListener("click",function(){
+        Scroll('.hospitality-bowl')
+    })
+
+</script>

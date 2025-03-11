@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <meta name="theme-color" content="#121212"/>
+    <meta name="viewport" content="width=device-width; initial-scale=1"/>
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11391499291"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'AW-11391499291');
+    </script>
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://goldenmileannex.com">
+    <meta property="og:image" content="/staatic/main-img.jpg">
+    <meta property="og:site_name" content="Golden Mile Annex">
+
+    <link rel="icon" type="image/png" href="/static/favicon.png">
+    <title>Golden Mile Annex - a community by Bizpro Properties Pvt. Ltd</title>
+    <meta property="og:title" content="Golden Mile Annex - a community by Bizpro Properties Pvt. Ltd">
+    <meta property="twitter:title" content="Golden Mile Annex - a community by Bizpro Properties Pvt. Ltd">
+
+    <meta property="og:description" content="Golden Mile is a residential gated community by Bizpro Properties Pvt. Ltd. that offers 24 plots of land in a 2-acre green oasis. With top-notch amenities, clubhouse, and hospitality, it’s an ideal investment for your future home.">
+    <meta property='twitter:description' content="Golden Mile is a residential gated community by Bizpro Properties Pvt. Ltd. that offers 24 plots of land in a 2-acre green oasis. With top-notch amenities, clubhouse, and hospitality, it’s an ideal investment for your future home.">
+    <style>
+
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
+
+      :root {
+         --black-dark : #121212;
+         --black-med : #484848;
+         --black-low : #969696 ;
+
+         --gray-dark : #ddd;
+         --gray-med : #eee;
+         --gray-light : #f3f3f3;
+
+         --back-ground : #f9f9f9 ;
+         --milk : #ffffff;
+         --black : #000000;
+         --base : #FF3131;
+         --base : #6a9001;
+      }
+
+      *{
+        box-sizing : border-box;
+        padding : 0;
+        margin : 0;
+      }
+      h1 {
+        font-size: clamp(2rem, 10vw, 3rem) !important;
+      }
+      h2 {
+        font-size: 2rem !important;
+        color: var(--black-dark);
+      }
+      h3 {
+        font-size: 1.5rem !important;
+        color: var(--black-med);
+      }
+      html {
+        scroll-behavior: smooth;
+        font-size: 16px;
+      }
+      body {
+        width : 100vw;
+        background : var(--back-ground) ;
+        font-family : "Playfair Display",serif;
+      }
+      img {
+        max-width: 100%;
+      }
+      p {
+        font-family: sans-serif;
+        line-height: 1.75em;
+      }
+      .gap {
+        height : 4.5em;
+      }
+      .wrapper {
+        width : 100vw;
+      }
+      .stiff {
+        width : 100%;
+        margin : 0 auto;
+        max-width: 1000px !important;
+      }
+    </style>
+  </head>
+  <body>
+
+    {% include "header.html" %}
+    <div class="gap"></div>
+
+    <section class="wrapper">
+      {% block content %}
+      {% endblock %}
+    </section>
+    {% include "forms.html" %}
+
+  </body>
+</html>

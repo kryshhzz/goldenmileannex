@@ -1,0 +1,653 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <style>
+        .hide {
+            display : none !important;
+        }
+        .bowl {
+            width: 100vw ;
+
+            display: grid;
+            grid-template-columns: 1fr;
+            align-items: center;
+        }
+        .cont {
+            width: 100%;
+            padding : 2em ;
+        }
+        .cont h2 {
+            color: var(--black-dark);
+            text-transform: uppercase;
+        }
+        .cont h3 {
+            text-transform: uppercase;
+        }
+        .box {
+            width : 100%;
+            display: grid;
+            grid-template-columns: 1fr;
+            place-items: center start;
+            grid-gap: 1.5em;
+        }
+        .box p {
+            color: var(--black-med);
+        }
+        .section-2 {
+            width : 100%;
+
+            display : grid;
+            grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+            place-items: start start;
+            grid-gap: 2.5em 2em;
+        }
+        .btn {
+            background: var(--base);
+            color : var(--milk);
+            padding: .75em 2em;
+            border-radius: 10em;
+            text-decoration: none;
+            transition: .25s;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap : 2em;
+        }
+        .btn:hover {
+            gap : 3em;
+        }
+        .atf-cont  {
+            width : 100%;
+            height : calc( 100vh - 4.5em );
+            position:relative;
+
+            background-image: url('/static/main-img.jpg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+        .layer{
+            position: absolute;
+            top: 0;
+            left : 0;
+            width : 100%;
+            height : 100%;
+            background: linear-gradient(to top, var(--black-dark),transparent);
+        }
+        .hero {
+            position: absolute;
+            right : 50%;
+            bottom : 0;
+            transform: translateX(50%);
+
+            padding: 3em 1.5em;
+            color: var(--milk);
+            text-align: center;
+
+            display: grid;
+            grid-template-columns: 1fr;
+            place-items: center;
+            grid-gap: 2em;
+        }
+        .hero h1 {
+            text-align: center;
+        }
+        .cta-cont  {
+            display: flex;
+            justify-content: center;
+            align-items : center;
+            gap : .25em;
+        }
+        .cta-cont a {
+            background: var(--black-med);
+            border-radius: 2em;
+            padding: .75em 2em;
+            color : var(--gray-dark);
+            text-decoration: none;
+            font-family: sans-serif;
+            z-index : 4;
+            transition : .25s;
+        }
+        .cta-hidden .contact1 {
+            margin-right : -10em;
+        }
+        .cta-hidden .contact2{
+            margin-left : -10em;
+        }
+        @media (max-width : 500px){
+            .cta-cont {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items : center;
+            }
+            .cta-hidden .contact1 {
+                margin-bottom : -2.9em;
+                margin-right : 0em;
+            }
+            .cta-hidden .contact2{
+                margin-top : -2.9em;
+                margin-left : 0em;
+            }
+        }
+        .cta {
+            background: var(--milk);
+            color: var(--black-dark);
+            padding : .75em 3em;
+            border-radius: 10em;
+            z-index : 5;
+            cursor : pointer;
+            font-weight: 500;
+        }
+        .cta-cont:hover > a {
+            color : var(--milk);
+        }
+        .rera-bowl {
+            background: var(--black-med);
+            color : var(--gray-dark);
+            padding : 1em;
+            font-size: .9em;
+        }
+        .rera-bowl a {
+            color: inherit;
+        }
+        .plots-box {
+            width: 100%;
+        }
+        .plot-intro {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap : 1em;
+        }
+        .plot-intro strong {
+            font-family: sans-serif;
+            font-size: 1.5em;
+            color: var(--base);
+        }
+        .plot-intro hr {
+            width : 7em;
+            border : none;
+            height : .1em;
+            background: var(--black-low);
+        }
+        .plot-list {
+            padding : 1.5em 1em 0 1em;
+            font-family: sans-serif;
+            color: var(--black-med);
+
+            display: grid;
+            grid-template-columns: 1fr;
+            place-items: center start;
+            grid-gap: 1em;
+        }
+        .dload-brochure {
+            padding : 2em 0;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+        }
+        .plots-maps {
+            display : grid;
+            grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+            place-items: start start;
+            grid-gap: 6em 2em;
+
+            margin-bottom : 4em;
+        }
+        .plot-location{
+            height : 100% ;
+        }
+        .plot-masterplan{
+            height : 100% ;
+        }
+        .plot-location div, .plot-masterplan div {
+            height: 100%;
+            padding: .25em;
+            border : .1em solid var(--gray-dark);
+            border-radius: .25em;
+
+            display: grid;
+            grid-template-columns: 1fr;
+            place-items: center;
+        }
+        .main-gallery {
+            background: var(--milk);
+            border-radius: .25em;
+            width : 100%;
+        }
+        .gallery-cell {
+            width: 100%;
+            max-width: 400px;
+            height: 250px;
+            margin-right: 10px;
+            background: var(--milk);
+            border-radius: inherit;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .gallery-cell img {
+            display: block;
+            width: 100%;
+            max-height: 100%;
+            border-radius: .25em;
+        }
+        .flickity-prev-next-button {
+            width: 3em;
+            height: 3em;
+            color : var(--black);
+            opacity: 1;
+            background: var(--milk);
+        }
+        .git-bowl  {
+            width : 100%;
+
+            display : grid;
+            grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+            place-items: center;
+            grid-gap: 1em;
+        }
+        .git-cont {
+            position: relative;
+
+            width: 100%;
+            background:var(--black-med);
+            color: var(--gray-light);
+            padding : 5em 1em 1em 1em;
+            border-radius: .25em;
+            cursor : pointer;
+        }
+        .git-cont:hover {
+            border-bottom: .25em solid var(--base) ;
+        }
+        .git-cont b {
+            font-weight: 400;
+            text-transform : uppercase;
+        }
+        .git-cont i {
+            position: absolute;
+            top : 1rem;
+            right : 1rem;
+            font-size: 1.5em;
+        }
+        .plots-box .table {
+            width : 100%;
+        }
+        .plots-box .table .tr {
+            width : 100%;
+            padding: 1.5em 2em;
+            border : .1em solid var(--gray-med);
+            color : var(--black-med);
+            text-decoration: none;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .plots-box .table .tr:hover > b{
+            font-weight: bold;
+        }
+        .plots-box .table .tr b {
+            font-weight: 400;
+        }
+        .plots-box .table .tr:nth-child(even) {
+            background: var(--gray-light);
+        }
+        .vachomes-cont img{
+            border-radius: .25em;
+            max-width : 300px;
+            width : 100%;
+        }
+        .vachomes-plate {
+            display: grid;
+            grid-template-columns: 1fr;
+            place-items: start;
+            grid-gap: 1em;
+        }
+        .vachomes-plate .vachomes-plate-h {
+            font-size: 1.25em;
+            color : var(--base);
+            font-family: 'Playfair Display',serif;
+        }
+        .hospitality-plate {
+            width : 100%;
+
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+            place-items: center;
+            grid-gap: 1em;
+        }
+        .hospitality-plate img {
+            border-radius: .25em;
+        }
+        .footer {
+            width: 100%;
+            background: var(--black-dark);
+            padding : 5em 1em;
+            margin-top: 3em;
+
+            display: grid;
+            grid-template-columns: 1fr;
+            place-items: center;
+        }
+        .footer .logo {
+            width : 10rem;
+            filter: brightness(0) invert(1)
+        }
+        .footer-cont {
+            width : 100%;
+            padding : 1em 1em 1.5rem 1em;
+
+            display :  flex;
+            justify-content : center;
+            align-items : center;
+            gap : 1em;
+        }
+        .footer-cont a {
+            font-family : sans-serif;
+            color : var(--gray-dark);
+            text-decoration: .1em solid underline var(--black-med);
+            font-size: .8em;
+        }
+        .testimonials-bowl {
+            padding :  2em 0 0 0 ;
+        }
+        .testimonials-cont {
+            width : 100%;
+            max-width: 300px;
+            height: 300px;
+            margin-top : 2em;
+            margin-right: 10px;
+            background: var(--gray-dark);
+            border-radius: inherit;
+            border-radius: .25em;
+            padding: 1em;
+
+            display : grid;
+            grid-template-columns: 1fr;
+            place-items: start center ;
+            grid-gap: 1em;
+        }
+        .testimonials-cont:hover > img{
+            transform : scale(1.25);
+        }
+        .testimonials-cont img {
+            width : 4em;
+            border-radius: 50%;
+            margin-top : -2.5em;
+            border : .2em solid var(--milk);
+            transition: .25s;
+        }
+        .testimonials-cont .testimonials-h {
+            font-family: inherit;
+            font-size : 1.25em;
+        }
+        .testimonials-cont p {
+            text-align: center;
+        }
+        .hospitality-rm {
+            color : var(--base);
+        }
+    </style>
+    <div class="bowl">
+        <div class="atf-cont">
+            <div class="layer"></div>
+            <div class="hero stiff">
+                <h1>Where plots become success stories !</h1>
+                <p>Golden Mile Annex is a niche residential gated community by Bizpro Properties Pvt. Ltd. that offers 24 plots of land in a 2-acre green oasis. You can enjoy the natural beauty of fruits, trees and plants while planning your dream home. With top notch amenities, clubhouse and hospitality Golden Mile Annex makes your best investment on your future home.</p>
+                <div class="cta-cont cta-hidden">
+                    <a href="tel:+917795058346" class="contact1">7795058346</a>
+                    <div class="cta" onclick="ctaToggle()">Contact Us</div>
+                    <a href="tel:+919886073139" class="contact2">9886073139</a>
+                </div>
+            </div>
+        </div>
+        <div class="rera-bowl">
+            <div class="rera-cont stiff">
+                <p>RERA STATUS  : RERA-TN/30/Layout/3794/2023</p>
+            </div>
+        </div>
+        <div class="cont aboutus-bowl">
+            <div class="aboutus-cont stiff box">
+                <h2 id="AboutUs">about us</h2>
+                <div class="aboutus-box">
+                    <p>
+                        Bizpro properties Pvt. Ltd - the company has rich experience in plotted development with amenities for more than a decade.
+                        We believe in appreciation of land as an asset class and help identifying right areas in the realestate landscape.
+                        Our philosophy is usage of any asset while it compounds & it has successfully led us to see a great communnity build in our 40 acre adjoining property with residents enjoying a flourishing community with all resources.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="cont plots-bowl">
+            <div class="plots-cont stiff box">
+                <h2 id="Plots">plots</h2>
+                <div class="plots-box">
+                    <div class="section-2">
+                        <div class="plot-intro">
+                            <strong>24</strong>
+                            <hr>
+                            <p>plots</p>
+                        </div>
+                        <div class="plot-intro">
+                            <strong>02</strong>
+                            <hr>
+                            <p>acres</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="plots-box">
+                    <div class="section-2">
+                        <div class="ptype">
+                            <h3>plot type</h3>
+                            <ul class="plot-list">
+                                <li>Type 1 : 2500 Sq.ft</li>
+                                <li>Type 2 : 2000 Sq.ft</li>
+                                <li>Type 3 : 1200 Sq.ft</li>
+                            </ul>
+                        </div>
+                        <div class="amenities">
+                            <h3>amenities</h3>
+                            <ul class="plot-list">
+                                <li>Billiards and Snooker room</li>
+                                <li>Badminton, Lawn tennis Court</li>
+                                <li>Private Pool Villa Stays</li>
+                                <li>Restaurant</li>
+                                <li>Swimming pools with Changing rooms</li>
+                                <li>Children's Play Area</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="dload-brochure hide" >
+                        <a href="/download-brochure/" class="btn">Download Brochure <i class="bi-download"></i></a>
+                    </div>
+                </div>
+                <div class="plots-box">
+                    <h3>near by infrastructure</h3>
+                    <br>
+                    <img class="nearbyinfra" src="/static/near-by-infra.png" alt="">
+                </div>
+                <br>
+                <div class="plots-box">
+                    <div class="section-2 plots-maps">
+                        <div class="plot-masterplan">
+                            <h3>masterplan</h3>
+                            <br>
+                            <div>
+                                <img src="/static/masterplan.jpeg" alt="masterplan of Golden Mile Annex">
+                            </div>
+                        </div>
+                        <div class="plot-location">
+                            <h3>location</h3>
+                            <br>
+                            <div>
+                                <img src="/static/location.png" alt="location of Golden Mile Annex">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="plots-box">
+                    <h3>status gallery</h3>
+                    <br>
+                    <div class="main-gallery" data-flickity='{ "cellAlign": "left", "contain": true, "autoPlay": true, "wrapAround": true }'>
+                        <div class="gallery-cell">
+                            <img src="/static/status1.jpg" alt="">
+                        </div>
+                        <div class="gallery-cell">
+                            <img src="/static/status2.jpg" alt="">
+                        </div>
+                        <div class="gallery-cell">
+                            <img src="/static/status3.jpg" alt="">
+                        </div>
+                        <div class="gallery-cell">
+                            <img src="/static/status4.jpg" alt="">
+                        </div>
+                        <div class="gallery-cell">
+                            <img src="/static/status5.jpg" alt="">
+                        </div>
+                        <div class="gallery-cell">
+                            <img src="/static/status6.jpg" alt="">
+                        </div>
+                        <div class="gallery-cell">
+                            <img src="/static/status7.jpg" alt="">
+                        </div>
+                        <div class="gallery-cell">
+                            <img src="/static/status8.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="plots-box">
+                    <h3>get in touch</h3>
+                    <br>
+                    <div class="git-bowl">
+                        <div class="git-cont" onclick="document.querySelector('.kmi_form').style.display='grid'">
+                            <b>keep me infromed</b>
+                            <i class="bi-info"></i>
+                        </div>
+                        <div class="git-cont" onclick="document.querySelector('.e_form').style.display='grid'">
+                            <b>make an enquiry</b>
+                            <i class="bi-question"></i>
+                        </div>
+                        <div class="git-cont" onclick="document.querySelector('.pav_form').style.display='grid'">
+                            <b>plan a visit</b>
+                            <i class="bi-building"></i>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="table">
+                        <div class="tr" onclick="document.querySelector('.modeofpay_form').style.display='grid'"><b>Mode Of Payment</b> <i class="bi-arrow-right"></i></div>
+                        <div class="tr" onclick="document.querySelector('.homeloan_form').style.display='grid'"><b>Home Loan</b> <i class="bi-arrow-right"></i></div>
+                        <div class="tr" onclick="document.querySelector('.listofdocs_form').style.display='grid'"><b>List Of Documents</b> <i class="bi-arrow-right"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cont vachomes-bowl">
+            <div class="vachomes-cont stiff box">
+                <h2 id="VacationHomes">vacation homes</h2>
+                <img src="/static/vacation-home.jpg" alt="">
+                <div class="vachomes-box">
+                    <div class="section-2">
+                        <div class="vachomes-plate">
+                            <p class="vachomes-plate-h">Save Time</p>
+                            <p>We want to save your time. We make sure you get your home in less then 3 months</p>
+                        </div>
+                        <div class="vachomes-plate">
+                            <p class="vachomes-plate-h">Affordable Price</p>
+                            <p>Our sustainable homes are very affordable, saves a lot of your expenses on construction and multiple expenses towards multiple middlemen</p>
+                        </div>
+                        <div class="vachomes-plate">
+                            <p class="vachomes-plate-h">Stress Less</p>
+                            <p>We will be your only point of contact. You will not have to deal with various people. We do that for you.</p>
+                        </div>
+                        <div class="vachomes-plate">
+                            <p class="vachomes-plate-h">Win Win Win</p>
+                            <p>We want everyone to win. You win when you get your home. We win when we sell and so does the environment.</p>
+                        </div>
+                        <div class="vachomes-plate">
+                            <p class="vachomes-plate-h">No Mess</p>
+                            <p>We only assemble at site. We make sure no mess is left behind like traditional construction. </p>
+                        </div>
+                        <div class="vachomes-plate">
+                            <p class="vachomes-plate-h">Be a Part of the Family</p>
+                            <p>Less carbon footprint, less havoc and to be a part of the population that understands the importance of being environmentally conscious.</p>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+        <div class="cont hospitality-bowl">
+            <div class="hospitality-cont stiff box">
+                <h2 id="Hospitality">hospitality</h2>
+                <div class="hospitality-box">
+                    <div class="hospitality-plate">
+                        <img src="/static/hospitality1.jpg" alt="">
+                        <img src="/static/hospitality2.jpg" alt="">
+                        <img src="/static/hospitality3.jpg" alt="">
+                    </div>
+                    <br>
+                    <p>Your perfect getaway home just 40 min drive from the city. Use facilities of our topnotch hospitality services while you stay with us & watch your home being taken care of while you are away! <a href="http://16bedouin.com/" class="hospitality-rm">Read more</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="cont happycutomers-bowl">
+            <div class="hcustomers stiff">
+                <h3>our happy customers</h3>
+                <div class="main-gallery testimonials-bowl" data-flickity='{ "cellAlign": "left", "contain": true, "autoPlay": true, "wrapAround": true }'>
+                    <div class="vachomes-plate testimonials-cont ">
+                        <img src="https://alternative.me/images/avatars/default.png" alt="">
+                        <p class="testimonials-h">Mr. Gopinath</p>
+                        <p>I've built my home at this great community about 7 years ago and have been enjoying a great life away from the city's hustle where i can enjoy fresh vegetables in my garden and also avail all the community servies.</p>
+                    </div>
+                    <div class="vachomes-plate testimonials-cont ">
+                        <img src="https://alternative.me/images/avatars/default.png" alt="">
+                        <p class="testimonials-h">Mr. Arun</p>
+                        <p>We always dreamt of having a get away home for our kids for the weekends, this commuity has given us ample freedom to make our custom home and enjoy all amenities.</p>
+                    </div>
+                    <div class="vachomes-plate testimonials-cont">
+                        <img src="https://alternative.me/images/avatars/default.png" alt="">
+                        <p class="testimonials-h">Mr. Patil</p>
+                        <p>Our family needed a get away home at a short drive from Bangalore and the kids enjoy the safe and secure community on weekendswith their friends.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="footer-cont">
+                <a href="tel:+917795058346">7795058346</a>
+                <a href="tel:+919886073139">9886073139</a>
+                <a href="mailto:goldenmileannex@gmail.com">goldenmileannex@gmail.com</a>
+            </div>
+            <img src="/static/logo.png" alt="Golden Mile Annex Logo" class="logo">
+        </div>
+    </div>
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script>
+        const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+        if ( vw < 600 ){
+            document.querySelector('.nearbyinfra').src = '/static/near-by-infra-mob.png';
+        }
+
+        function ctaToggle(){
+            document.querySelector('.cta-cont').classList.toggle('cta-hidden');
+        }
+
+        function Scroll(hashtag){
+            var element = document.querySelector(hashtag);
+            var y = element.offsetTop - 64;
+            window.scrollTo(0, y)
+        }
+    </script>
+    {% if message %}
+        <script>
+            alert("{{ message }}")
+        </script>
+    {% endif %}
+
+{% endblock %}

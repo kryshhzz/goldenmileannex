@@ -1,0 +1,256 @@
+<style>
+    .form-bowl {
+        width : 100%;
+        height: 100%;
+        z-index: 101;
+        background: rgba(0,0,0,.5);
+        padding: 1.5em 2em;
+
+        position: fixed;
+        top : 0;
+        left : 0;
+
+        display: grid;
+        grid-template-columns: 1fr;
+        place-items: center;
+    }
+    .form-cont {
+        width : 100%;
+        max-width: 500px !important;
+        background: var(--milk);
+        border-radius: .5em;
+        padding : 1em;
+
+        display: grid;
+        grid-template-columns: 1fr;
+        place-items: center start;
+        grid-gap: 3em;
+    }
+    .form-meta {
+        width : 100%;
+        position : relative;
+    }
+    .form-meta .close-form {
+        padding : .5em .65em;
+        border-radius: 25em;
+        background : red;
+        color : var(--milk);
+        font-size: .9em;
+        cursor: pointer;
+        opacity: .8;
+        transition: .2s;
+
+        position: absolute;
+        top : 0;
+        right :  0;
+    }
+    .form-meta .close-form:hover {
+        opacity:1;
+    }
+    .form-cont form {
+        width : 100%;
+
+        display: grid;
+        grid-template-columns: 1fr;
+        place-items: start;
+        grid-gap: .75em;
+    }
+    .form-cont form button {
+        padding : .75em 2em ;
+        font-family: inherit;
+        background: var(--black-dark);
+        color : var(--milk);
+        border : none;
+        outline : none;
+        border-radius: .25em;
+        transition: .2s;
+    }
+    .form-cont form button:hover {
+        background: var(--black-med);
+    }
+    .form-cont form p {
+        width : 100%;
+
+        display: grid;
+        grid-template-columns: 1fr;
+        place-items: start;
+    }
+    .form-cont form p label {
+        font-size: .9em;
+        color : var(--black-low);
+    }
+    .form-cont form p input {
+        width: 100%;
+        border : none;
+        outline: none;
+        border-bottom : .1em solid var(--gray-dark);
+        padding : .35em 0;
+        font-size: 1em;
+        color : var(--black-med);
+    }
+    .kmi_form, .e_form, .pav_form, .modeofpay_form, .homeloan_form, .listofdocs_form {
+        display : none;
+    }
+    .faqs_q_bowl {
+        width : 100%;
+
+        display: grid;
+        grid-template-columns: 1fr;
+        place-items: center;
+        grid-gap: 1.5em;
+    }
+    .faqs_q_cont {
+        width : 100%;
+
+        display: grid;
+        grid-template-columns: 1fr;
+        place-items: center start;
+        grid-gap: .75em;
+    }
+    .faqs_q_cont u {
+        text-decoration: none;
+        font-family : sans-serif;
+        line-height: 1.5em;
+    }
+    .hdfc_cont {
+        padding : 1em ;
+        background : var(--gray-med);
+        border-radius: .25em;
+        display: grid;
+        grid-template-columns: 1fr;
+        place-items: center !important;
+        grid-gap: .75em;
+    }
+    .hdfc_cont img {
+        max-width : 200px;
+    }
+</style>
+<div class="form-bowl kmi_form">
+    <div class="form-cont stiff">
+        <div class="form-meta">
+            <h3>keep me infromed</h3>
+            <div class="close-form" onclick="document.querySelector('.kmi_form').style.display='none'">
+                <i class="bi-x-lg"></i>
+            </div>
+        </div>
+        <form action = "#" method = "post">
+            {% csrf_token %}
+            {{ kmi_form.as_p }}
+            <br>
+            <input type="hidden" name="tier" value="1">
+            <button>Submit</button>
+        </form>
+    </div>
+</div>
+<div class="form-bowl e_form">
+    <div class="form-cont stiff">
+        <div class="form-meta">
+            <h3>make an enquiry</h3>
+            <div class="close-form" onclick="document.querySelector('.e_form').style.display='none'">
+                <i class="bi-x-lg"></i>
+            </div>
+        </div>
+        <form action = "#" method = "get">
+            {% csrf_token %}
+            {{ e_form.as_p }}
+            <br>
+            <input type="hidden" name="tier" value="2">
+            <button>Submit</button>
+        </form>
+    </div>
+</div>
+<div class="form-bowl pav_form">
+    <div class="form-cont stiff">
+        <div class="form-meta">
+            <h3>plan a visit</h3>
+            <div class="close-form" onclick="document.querySelector('.pav_form').style.display='none'">
+                <i class="bi-x-lg"></i>
+            </div>
+        </div>
+        <form action = "#" method = "post">
+            {% csrf_token %}
+            {{ pav_form.as_p }}
+            <br>
+            <input type="hidden" name="tier" value="3">
+            <button>Submit</button>
+        </form>
+    </div>
+</div>
+
+<!-- faqs -->
+<div class="form-bowl modeofpay_form">
+    <div class="form-cont stiff">
+        <div class="form-meta">
+            <h3>Mode Of Payments</h3>
+            <div class="close-form" onclick="document.querySelector('.modeofpay_form').style.display='none'">
+                <i class="bi-x-lg"></i>
+            </div>
+        </div>
+        <div class="faqs_q_bowl">
+            <div class="faqs_q_cont">
+                <u><b>Please prepare a cheque in favour of "Shradha Rungta"</b>
+                <br><br>
+                Post / courier / hand deliver the cheque to our corporate office:
+                <br><br>
+                    Bizpro Properties Pvt Ltd<br>
+                    No 598,599,<br>
+                    1st main,<br>
+                    15th cross,<br>
+                    HSR sector 6,<br>
+                    Bangalore 560 102. INDIA<br>
+                    <br>
+                    For payments towards club memberships, cheques should be in favour of "Shradha Rungta"
+                <br><br>
+                    <b>Note: Cheques deposited directly in our bank account cannot be acknowledged and we cannot be held responsible for direct payments into our account.
+                    </b>
+                </u>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-bowl listofdocs_form">
+    <div class="form-cont stiff">
+        <div class="form-meta">
+            <h3>List Of Documents</h3>
+            <div class="close-form" onclick="document.querySelector('.listofdocs_form').style.display='none'">
+                <i class="bi-x-lg"></i>
+            </div>
+        </div>
+        <div class="faqs_q_bowl">
+            <div class="faqs_q_cont">
+                <u>
+                    <b>Please bring the following documents when booking an apartment:</b>
+                    <br><br>
+                    ID proof: Driving License / Passport / Voter’s ID<br>
+                    PAN Card Copy<br>
+                    2 passport size photographs<br>
+                    Cheque Book<br>
+                </u>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-bowl homeloan_form">
+    <div class="form-cont stiff">
+        <div class="form-meta">
+            <h3>Home Loan</h3>
+            <div class="close-form" onclick="document.querySelector('.homeloan_form').style.display='none'">
+                <i class="bi-x-lg"></i>
+            </div>
+        </div>
+        <div class="faqs_q_bowl">
+            <div class="faqs_q_cont">
+                <b>Who can apply for a home loan?</b>
+                <u>Any Indian Resident, Non-resident Indian or Person of Indian Origin can apply for a home loan if they are 21 years of age at the origin of the loan and 65 years or below at loan maturity. Housing Finance Companies (HFCs) usually give home loans for properties located in India to people who are employed or self-employed, with a regular source of income.</u>
+            </div>
+            <div class="faqs_q_cont">
+                <b>When can a home loan be applied for?</b>
+                <u>An individual can apply for a home loan even before the property has been selected. The loan amount is sanctioned based on the ability to repay. This helps in planning a budget while purchasing the house.</u>
+            </div>
+            <div class="faqs_q_cont hdfc_cont">
+                <img src="https://assets.talview.com/page-assets/images/hdfc/logo_hdfc.png" alt="">
+                <u>Our Loan Partner</u>
+            </div>
+        </div>
+    </div>
+</div>
